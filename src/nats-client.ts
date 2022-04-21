@@ -34,25 +34,21 @@ class NatsClient {
       });
     });
 
-    console.log("Successfully configured JetStream");
+    console.info("Successfully configured JetStream");
   }
 
   async connect(options: ConnectionOptions, streams: string[]): Promise<void> {
     if (!this.wrappedClient) {
-      try {
-        this.wrappedClient = await connect(options);
-        console.log(
-          `Successfully connected to NATS server @ ${this.wrappedClient.getServer()}`
-        );
-        this.addStreams(streams);
-      } catch (err) {
-        console.error("Error connecting to NATS server");
-      }
+      this.wrappedClient = await connect(options);
+      console.info(
+        `Successfully connected to NATS server @ ${this.wrappedClient.getServer()}`
+      );
+      this.addStreams(streams);
     }
   }
 
   async close(): Promise<void> {
-    console.log("Closing NATS connection...");
+    console.info("Closing NATS connection...");
     if (this.wrappedClient) {
       await this.wrappedClient.close();
     }
