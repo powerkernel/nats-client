@@ -5,5 +5,6 @@
  */
 
 import NatsClient from "./nats-client";
+import NatsPublisherClient from "./nats-publisher-client";
 
-export { NatsClient };
+export { NatsClient, NatsPublisherClient };
