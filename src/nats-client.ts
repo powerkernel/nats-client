@@ -22,7 +22,7 @@ class NatsClient {
     return this.wrappedClient;
   }
 
-  private async addStreams(streams: string[]): Promise<void> {
+  async addStreams(streams: string[]): Promise<void> {
     const jsm = await this.client.jetstreamManager();
 
     streams.forEach(async (stream) => {
@@ -37,13 +37,12 @@ class NatsClient {
     console.info("Successfully configured JetStream");
   }
 
-  async connect(options: ConnectionOptions, streams: string[]): Promise<void> {
+  async connect(options: ConnectionOptions): Promise<void> {
     if (!this.wrappedClient) {
       this.wrappedClient = await connect(options);
       console.info(
         `Successfully connected to NATS server @ ${this.wrappedClient.getServer()}`
       );
-      this.addStreams(streams);
     }
   }
 
