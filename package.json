@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "update": "npx npm-check-updates",
-    "upgrade": "npx npm-check-updates -u",
+    "upgrade": "npx npm-check-updates -u && npm i",
     "release": "npx standard-version && git push --follow-tags origin main",
     "test": "jest --coverage",
     "testw": "jest --coverage --watch",
@@ -43,13 +43,13 @@
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
     "husky": "7.0.4",
-    "jest": "27.5.1",
+    "jest": "28.0.2",
     "prettier": "2.6.2",
     "ts-jest": "27.1.4",
     "typescript": "4.6.3"
   },
   "dependencies": {
-    "@powerkernel/common": "^0.2.2",
+    "@powerkernel/common": "^0.2.7",
     "nats": "^2.6.1"
   }
 }
