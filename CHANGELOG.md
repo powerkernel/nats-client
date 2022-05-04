@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/powerkernel/nats-client/compare/v1.4.0...v1.4.1) (2022-05-04)
+
+
+### Bug Fixes
+
+* add consumer settings ([9aed79d](https://github.com/powerkernel/nats-client/commit/9aed79dcb9b51e36e70f6875231d5aec4e74316a))
+
 ## [1.4.0](https://github.com/powerkernel/nats-client/compare/v1.3.1...v1.4.0) (2022-05-04)
 
 
