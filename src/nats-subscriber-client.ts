@@ -10,11 +10,11 @@ import { NatsClient } from ".";
 
 class NatsSubscriberClient implements SubscriberClient {
   protected service: string;
-  protected maxPullBatch: number;
+  protected maxAckPending: number;
 
-  constructor(service: string, maxPullBatch = 10) {
+  constructor(service: string, maxAckPending = 10) {
     this.service = service;
-    this.maxPullBatch = maxPullBatch;
+    this.maxAckPending = maxAckPending;
   }
 
   async subscribe(
@@ -27,8 +27,7 @@ class NatsSubscriberClient implements SubscriberClient {
     opts.manualAck();
     opts.ackExplicit();
     opts.deliverTo(createInbox());
-    opts.maxPullBatch(this.maxPullBatch);
-    opts.maxAckPending(5);
+    opts.maxAckPending(this.maxAckPending);
     opts.callback(async (_, msg) => {
       if (msg !== null) {
         console.log("received message: ", msg.seq);
