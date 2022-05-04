@@ -33,7 +33,9 @@ class NatsSubscriberClient implements SubscriberClient {
         const sc = StringCodec();
         const eventDetail = sc.decode(msg.data);
         await cb(eventDetail);
-        msg.ack();
+        console.log("processed message: ", msg);
+        await msg.ackAck();
+        console.log("acked message:");
       }
     });
     await js.subscribe(topic, opts);
