@@ -35,7 +35,7 @@ class NatsSubscriberClient implements SubscriberClient {
         await cb(eventDetail);
         console.log("processed message: ", msg);
         await msg.ackAck();
-        console.log("acked message:");
+        console.log("acked message: ", msg);
       }
     });
     await js.subscribe(topic, opts);
