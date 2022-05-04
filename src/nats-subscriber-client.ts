@@ -11,10 +11,12 @@ import { NatsClient } from ".";
 class NatsSubscriberClient implements SubscriberClient {
   protected service: string;
   protected maxMessages: number;
+  protected limit: number;
 
-  constructor(service: string, maxMessages = 3) {
+  constructor(service: string, maxMessages = 64, limit = 1024) {
     this.service = service;
     this.maxMessages = maxMessages;
+    this.limit = limit;
   }
 
   async subscribe(
@@ -28,6 +30,7 @@ class NatsSubscriberClient implements SubscriberClient {
     opts.ackExplicit();
     opts.deliverTo(createInbox());
     opts.maxMessages(this.maxMessages);
+    opts.limit(this.limit);
     opts.callback(async (_, msg) => {
       if (msg !== null) {
         const sc = StringCodec();
