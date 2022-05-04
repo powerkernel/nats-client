@@ -28,6 +28,7 @@ class NatsSubscriberClient implements SubscriberClient {
     opts.ackExplicit();
     opts.deliverTo(createInbox());
     opts.maxPullBatch(this.maxPullBatch);
+    opts.maxAckPending(5);
     opts.callback(async (_, msg) => {
       if (msg !== null) {
         console.log("received message: ", msg.seq);
