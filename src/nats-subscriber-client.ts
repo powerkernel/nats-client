@@ -27,7 +27,6 @@ class NatsSubscriberClient implements SubscriberClient {
     opts.manualAck();
     opts.ackExplicit();
     opts.deliverTo(createInbox());
-    opts.flowControl();
     opts.maxMessages(this.maxMessages);
     opts.callback(async (_, msg) => {
       if (msg !== null) {
