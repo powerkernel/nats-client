@@ -25,7 +25,7 @@ class NatsSubscriberClient implements SubscriberClient {
     const opts = consumerOpts();
     opts.queue(this.service);
     opts.durable(this.service);
-    opts.deliverTo(createInbox("inbox"));
+    opts.deliverTo(this.service);
 
     opts.manualAck();
     opts.ackExplicit();
