@@ -25,9 +25,11 @@ class NatsSubscriberClient implements SubscriberClient {
     const opts = consumerOpts();
     opts.queue(this.service);
     opts.durable(this.service);
+    opts.deliverTo(createInbox("inbox"));
+
     opts.manualAck();
     opts.ackExplicit();
-    opts.deliverTo(createInbox());
+
     opts.maxAckPending(this.maxAckPending);
     opts.callback(async (_, msg) => {
       if (msg !== null) {
