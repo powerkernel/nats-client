@@ -13,10 +13,10 @@ class NatsSubscriberClient implements SubscriberClient {
   protected maxAckPending: number;
   protected durableName: string;
 
-  constructor(service: string, maxAckPending = 10, durableName: string) {
+  constructor(service: string, durableName: string, maxAckPending = 10) {
     this.service = service;
-    this.maxAckPending = maxAckPending;
     this.durableName = durableName;
+    this.maxAckPending = maxAckPending;
   }
 
   async subscribe(
