@@ -5,16 +5,18 @@
  */
 
 import { SubscriberClient } from "@powerkernel/common";
-import { consumerOpts, createInbox, StringCodec } from "nats";
+import { consumerOpts, StringCodec } from "nats";
 import { NatsClient } from ".";
 
 class NatsSubscriberClient implements SubscriberClient {
   protected service: string;
   protected maxAckPending: number;
+  protected durableName: string;
 
-  constructor(service: string, maxAckPending = 10) {
+  constructor(service: string, maxAckPending = 10, durableName: string) {
     this.service = service;
     this.maxAckPending = maxAckPending;
+    this.durableName = durableName;
   }
 
   async subscribe(
@@ -23,9 +25,11 @@ class NatsSubscriberClient implements SubscriberClient {
   ): Promise<void> {
     const js = NatsClient.client.jetstream();
     const opts = consumerOpts();
-    opts.queue(this.service);
-    opts.durable(this.service);
+    opts.durable(this.durableName);
+
+    // queue & deliverTo must be the same
     opts.deliverTo(this.service);
+    opts.queue(this.service);
 
     opts.manualAck();
     opts.ackExplicit();
