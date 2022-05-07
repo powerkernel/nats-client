@@ -29,7 +29,7 @@ class NatsClient {
       await jsm.streams.add({
         name: stream,
         subjects: [`${stream}.*`],
-        // retention: RetentionPolicy.Workqueue,
+        retention: RetentionPolicy.Interest,
         storage: StorageType.Memory,
       });
     });
