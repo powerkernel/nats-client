@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.17](https://github.com/powerkernel/nats-client/compare/v1.4.16...v1.4.17) (2022-05-09)
+
 ### [1.4.16](https://github.com/powerkernel/nats-client/compare/v1.4.15...v1.4.16) (2022-05-07)
 
 ### [1.4.15](https://github.com/powerkernel/nats-client/compare/v1.4.14...v1.4.15) (2022-05-07)
