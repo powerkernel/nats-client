@@ -31,6 +31,7 @@ class NatsSubscriberClient implements SubscriberClient {
     opts.maxAckPending(this.maxAckPending);
     opts.callback(async (_, msg) => {
       if (msg !== null) {
+        console.log("received message: ", msg?.seq);
         const sc = StringCodec();
         const eventDetail = sc.decode(msg.data);
         await cb(eventDetail);
