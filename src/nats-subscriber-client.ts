@@ -4,18 +4,16 @@
  * @copyright Copyright (c) 2022 Power Kernel
  */
 
-import { SubscriberClient } from "@powerkernel/common";
-import { consumerOpts, StringCodec } from "nats";
+import { Helper, SubscriberClient } from "@powerkernel/common";
+import { consumerOpts, StringCodec, createInbox } from "nats";
 import { NatsClient } from ".";
 
 class NatsSubscriberClient implements SubscriberClient {
   protected service: string;
   protected maxAckPending: number;
-  protected durableName: string;
 
-  constructor(service: string, durableName: string, maxAckPending = 10) {
+  constructor(service: string, maxAckPending = 10) {
     this.service = service;
-    this.durableName = durableName;
     this.maxAckPending = maxAckPending;
   }
 
@@ -25,15 +23,11 @@ class NatsSubscriberClient implements SubscriberClient {
   ): Promise<void> {
     const js = NatsClient.client.jetstream();
     const opts = consumerOpts();
-    opts.durable(this.durableName);
-
-    // queue & deliverTo must be the same
-    opts.deliverTo(this.service);
     opts.queue(this.service);
-
+    opts.durable(Helper.md5(topic));
+    opts.deliverTo(createInbox(topic));
     opts.manualAck();
     opts.ackExplicit();
-
     opts.maxAckPending(this.maxAckPending);
     opts.callback(async (_, msg) => {
       if (msg !== null) {
