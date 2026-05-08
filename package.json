@@ -34,8 +34,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "@commitlint/cli": "20.5.3",
-    "@commitlint/config-conventional": "20.5.3",
+    "@commitlint/cli": "21.0.0",
+    "@commitlint/config-conventional": "21.0.0",
     "@types/jest": "29.5.14",
     "@typescript-eslint/eslint-plugin": "8.59.2",
     "@typescript-eslint/parser": "8.59.2",
